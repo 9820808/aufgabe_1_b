@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skiverleih Backend</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>⛷ Skiverleih</h1>
+    <nav id="tabs">
+      <a href="#dashboard" data-tab="dashboard">Dashboard</a>
+      <a href="#skis" data-tab="skis">Ski</a>
+      <a href="#customers" data-tab="customers">Kunden</a>
+      <a href="#rent" data-tab="rent">Verleih</a>
+      <a href="#return" data-tab="return">Rückgabe</a>
+      <a href="reservierung.html" class="external" target="_blank">Kundenseite: Reservierung ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="message" hidden></div>
+
+    <!-- Anforderung 0: Dashboard -->
+    <section id="tab-dashboard" class="tab">
+      <h2>Dashboard</h2>
+      <div class="cards" id="stats"></div>
+    </section>
+
+    <!-- Anforderung 1 + 2: Ski verwalten -->
+    <section id="tab-skis" class="tab" hidden>
+      <h2>Ski-Datenbank</h2>
+      <form id="ski-form" class="inline-form">
+        <label>Anschaffungsjahr <input name="year" type="number" min="1900" max="2999" required></label>
+        <label>Inventarnummer <input name="inventoryNumber" required pattern="\d{4}-\d+"></label>
+        <label>Marke <input name="brand" required></label>
+        <label>Modell <input name="model" required></label>
+        <label>Länge (cm) <input name="lengthCm" type="number" min="50" max="250" required></label>
+        <button type="submit">Ski hinzufügen</button>
+      </form>
+      <table>
+        <thead><tr><th>Inventarnr.</th><th>Marke</th><th>Modell</th><th>Länge</th><th>Status</th><th></th></tr></thead>
+        <tbody id="ski-list"></tbody>
+      </table>
+    </section>
+
+    <!-- Anforderung 3 + 4: Kunden verwalten -->
+    <section id="tab-customers" class="tab" hidden>
+      <h2>Kunden-Datenbank</h2>
+      <form id="customer-form" class="grid-form">
+        <label>Name <input name="name" required></label>
+        <label>Telefon <input name="phone" type="tel" required></label>
+        <label>E-Mail <input name="email" type="email" required></label>
+        <label>Anschrift <input name="address" required></label>
+        <label>Skilänge min (cm) <input name="preferredMinCm" type="number" min="50" max="250" required></label>
+        <label>Skilänge max (cm) <input name="preferredMaxCm" type="number" min="50" max="250" required></label>
+        <label>Ausweistyp
+          <select name="idType">
+            <option value="fuehrerschein">Führerschein</option>
+            <option value="pass">Pass</option>
+          </select>
+        </label>
+        <label>Ausweisnummer <input name="idNumber"></label>
+        <label>Ausweisfoto <input name="photo" type="file" accept="image/*"></label>
+        <p class="hint">Ausweisnummer <em>oder</em> Ausweisfoto ist Pflicht – beides geht auch.</p>
+        <button type="submit">Kunde anlegen</button>
+      </form>
+      <table>
+        <thead><tr><th>Name</th><th>Kontakt</th><th>Anschrift</th><th>Ausweis</th><th>Skilänge</th><th>Foto</th><th>Status</th><th></th></tr></thead>
+        <tbody id="customer-list"></tbody>
+      </table>
+    </section>
+
+    <!-- Anforderung 5: Verleih -->
+    <section id="tab-rent" class="tab" hidden>
+      <h2>Ski verleihen</h2>
+      <div class="inline-form">
+        <label>Kunde <select id="rent-customer"><option value="">– Kunde wählen –</option></select></label>
+        <label>Rückgabe bis (einschließlich) <input id="rent-until" type="date" required></label>
+      </div>
+      <p id="rent-info"></p>
+      <table>
+        <thead><tr><th>Inventarnr.</th><th>Marke</th><th>Modell</th><th>Länge</th><th>Hinweis</th><th></th></tr></thead>
+        <tbody id="rent-list"></tbody>
+      </table>
+    </section>
+
+    <!-- Anforderung 6: Rückgabe -->
+    <section id="tab-return" class="tab" hidden>
+      <h2>Ski zurücknehmen</h2>
+      <div class="columns">
+        <div>
+          <label>Nach Kunde <select id="return-customer"><option value="">– Kunde wählen –</option></select></label>
+          <div id="return-by-customer"></div>
+        </div>
+        <div>
+          <label>Nach Ski <select id="return-ski"><option value="">– Ski wählen –</option></select></label>
+          <div id="return-by-ski"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

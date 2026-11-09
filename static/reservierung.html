@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skiverleih – Reservierung</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Anforderung 7: Kundenseite zum Reservieren -->
+  <header class="customer">
+    <h1>⛷ Skiverleih – Ski reservieren</h1>
+  </header>
+
+  <main>
+    <div id="message" hidden></div>
+
+    <form id="res-form" class="inline-form">
+      <label>Ich bin <select id="res-customer" required><option value="">– Name wählen –</option></select></label>
+      <label>Von <input id="res-from" type="date" required></label>
+      <label>Bis (einschließlich) <input id="res-to" type="date" required></label>
+      <button type="submit">Freie Ski suchen</button>
+    </form>
+    <p class="hint">Reservierungen sind ab morgen möglich und gelten für ganze Tage.</p>
+
+    <h2>Freie Ski</h2>
+    <p id="res-info"></p>
+    <table>
+      <thead><tr><th>Inventarnr.</th><th>Marke</th><th>Modell</th><th>Länge</th><th></th></tr></thead>
+      <tbody id="res-list"></tbody>
+    </table>
+
+    <h2>Meine Reservierungen</h2>
+    <table>
+      <thead><tr><th>Von</th><th>Bis</th><th>Tage</th><th>Inventarnr.</th><th>Ski</th></tr></thead>
+      <tbody id="my-reservations"></tbody>
+    </table>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="reservierung.js"></script>
+</body>
+</html>
